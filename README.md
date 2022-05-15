@@ -6,6 +6,14 @@ Please use Node 16+
 npm install
 ```
 
+Set sender private key
+
+```
+export SENDER_PRIVATE_KEY=ed25519:621UCwz[...]
+```
+
+(Modify code to use different accounts)
+
 ### Run
 
 ```
