@@ -1,0 +1,11 @@
+{
+  "name": "near-tx-timing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "js-sha256": "^0.9.0",
+    "near-api-js": "^0.44.2"
+  }
+}
