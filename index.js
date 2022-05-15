@@ -71,34 +71,31 @@ console.log("tx:", txBase64);
 console.time("send");
 
 // Option 1 -- send async and check status
-const txHash = await near.connection.provider.sendJsonRpc(
-  "broadcast_tx_async",
-  [txBase64]
-);
-console.timeLog("send", "broadcast");
-console.log("tx hash:", txHash);
-
-let tx;
-do {
-  console.time("tx_status_request");
-  try {
-    tx = await near.connection.provider.sendJsonRpc("tx", [txHash, sender]);
-  } catch (error) {
-    console.log("Tx not found");
-  }
-  console.log(tx);
-  console.timeEnd("tx_status_request");
-  console.timeLog("send");
-  await setTimeout(250);
-  if (tx?.status?.SuccessValue) {
-    console.log(">>>", tx);
-  }
-} while (tx?.status?.SuccessValue !== "");
-
-// Option 2 -- send sync and await for status
-// const txResult = await near.connection.provider.sendJsonRpc(
-//   "broadcast_tx_commit",
+// const txHash = await near.connection.provider.sendJsonRpc(
+//   "broadcast_tx_async",
 //   [txBase64]
 // );
-// console.timeEnd("send", "final");
-// console.log("tx result:", txResult);
+// console.timeLog("send", "broadcast");
+// console.log("tx hash:", txHash);
+
+// let tx;
+// do {
+//   console.time("tx_status_request");
+//   try {
+//     tx = await near.connection.provider.sendJsonRpc("tx", [txHash, sender]);
+//   } catch (error) {
+//     console.log("Tx not found");
+//   }
+//   console.timeEnd("tx_status_request");
+//   console.timeLog("send");
+//   console.log(tx);
+//   await setTimeout(250);
+// } while (tx?.status?.SuccessValue !== "");
+
+// Option 2 -- send sync and await for status
+const txResult = await near.connection.provider.sendJsonRpc(
+  "broadcast_tx_commit",
+  [txBase64]
+);
+console.timeEnd("send", "final");
+console.log("tx result:", txResult);
